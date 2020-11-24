@@ -566,7 +566,7 @@ async fn parses_sink_partial_request() {
         encoding = "json"
 
         [sinks.out.request]
-        in_flight_limit = 42
+        concurrency = 42
         "#,
     )
     .await
@@ -588,7 +588,7 @@ async fn parses_sink_full_request() {
         encoding = "json"
 
         [sinks.out.request]
-        in_flight_limit = 42
+        concurrency = 42
         timeout_secs = 2
         rate_limit_duration_secs = 3
         rate_limit_num = 4
