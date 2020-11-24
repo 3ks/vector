@@ -18,22 +18,22 @@ pub struct GeneratorConfig {
     batch_interval: Option<f64>,
     #[serde(default = "usize::max_value")]
     count: usize,
-    #[serde(flatten)]
+    #[serde(flatten, default = "OutputFormat::ApacheCommon")]
     format: OutputFormat,
 }
 
 #[derive(Clone, Debug, Derivative, Deserialize, Serialize)]
 #[derivative(Default)]
-#[serde(tag = "format", rename_all = "snake_case")]
+#[serde(rename_all = "snake_case")]
 pub enum OutputFormat {
     #[derivative(Default)]
+    ApacheCommon,
     RoundRobin {
         #[serde(default)]
         sequence: bool,
         #[serde(alias = "lines")]
         items: Vec<String>,
     },
-    ApacheCommon,
     ApacheError,
     Syslog,
 }
